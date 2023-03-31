@@ -9,14 +9,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="@dimen/margin_16dp"
     tools:context=".login.view.LoginActivity">
 <EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    android:layout_marginBottom="16dp"
+    android:layout_marginBottom="@dimen/margin_16dp"
     app:layout_constraintBottom_toTopOf="@+id/etPassword"
     android:hint="@string/email"/>
     <EditText
@@ -26,7 +26,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:inputType="textPassword"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/margin_16dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_login"
         android:hint="@string/password"/>
     <Button
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn_signup"
         android:text="@string/sign_up"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_login"
