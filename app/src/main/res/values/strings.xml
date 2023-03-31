@@ -6,4 +6,6 @@
     <string name="sign_up">sign up</string>
     <string name="name">Name</string>
     <string name="short_biography">Short Biography</string>
+    <string name="city">city</string>
+
 </resources>
