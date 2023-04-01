@@ -18,19 +18,25 @@ class LoginViewModel : ViewModel() {
     private lateinit var auth: FirebaseAuth
     var userLiveData = MutableLiveData<User>()
     var db = FirebaseFirestore.getInstance()
+    var error = MutableLiveData<String>()
 
     fun doLogin(email: String, password: String) {
         fireBaseRepo = FirebaseRepository()
         auth = Firebase.auth
-        auth.signInWithEmailAndPassword(email.toString(), password.toString())
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    fetchUser(email)
-                    Log.d("succes", auth.currentUser.toString())
-                } else {
-                    //TODO
+        if(email.isNotEmpty()&& password.isNotEmpty()) {
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        fetchUser(email)
+                        Log.d("succes", auth.currentUser.toString())
+                    } else {
+                        error.postValue("user not exist")
+                    }
                 }
-            }
+        }
+        else{
+            error.postValue("Enter user detail")
+        }
     }
 
     fun fetchUser(email: String?) {
@@ -46,7 +52,7 @@ class LoginViewModel : ViewModel() {
                     userLiveData.postValue(user)
                     Log.d(ContentValues.TAG, "DocumentSnapshot data: ${document.data}")
                 } else {
-                    Log.d(ContentValues.TAG, "No such document")
+                    error.postValue("User not exist")
                 }
             }
             .addOnFailureListener { exception ->

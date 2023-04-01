@@ -9,7 +9,7 @@ import com.example.myfirebaseapplication.R
 import com.example.myfirebaseapplication.databinding.ItemWeatherRecycleLayoutBinding
 import com.example.myfirebaseapplication.model.List
 
-class WeatherListAdapter(var weatherList: kotlin.collections.List<List>, val context: Context) :
+class WeatherListAdapter(var weatherList: java.util.ArrayList<List>, val context: Context) :
     RecyclerView.Adapter<WeatherListAdapter.WeatherViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
@@ -21,8 +21,8 @@ class WeatherListAdapter(var weatherList: kotlin.collections.List<List>, val con
     }
 
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
-        val item = weatherList[position].weather
-        holder.bindingView.dataModel = item.toString()
+        val item = weatherList[position].main
+        holder.bindingView.dataModel = item.temp.toString()
     }
 
     override fun getItemCount(): Int {
@@ -30,11 +30,13 @@ class WeatherListAdapter(var weatherList: kotlin.collections.List<List>, val con
     }
 
     fun updateAcroList(weatherResult: kotlin.collections.List<List>) {
-      //  weatherList.addAll(weatherResult)
+        clearList()
+       weatherList.addAll(weatherResult)
+        notifyDataSetChanged()
     }
 
     fun clearList() {
-     //   weatherList.clear()
+        weatherList.clear()
     }
 
     inner class WeatherViewHolder(val bindingView: ItemWeatherRecycleLayoutBinding) :

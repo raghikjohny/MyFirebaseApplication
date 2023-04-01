@@ -6,6 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiInterface {
-    @GET("weather?")
+    @GET("forecast")
     suspend fun weatherResponse(@Query("q") q: String,@Query("appid") appid:String): Response<ApiResponse>
 }
