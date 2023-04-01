@@ -7,5 +7,6 @@
     <string name="name">Name</string>
     <string name="short_biography">Short Biography</string>
     <string name="city">city</string>
+    <string name="error_text">something went wrong</string>
 
 </resources>
