@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -29,11 +30,17 @@ class LoginActivity : AppCompatActivity() {
 
     private fun observeLogin() {
        viewModel.userLiveData.observe(this@LoginActivity, Observer {
-           val intent = Intent(this@LoginActivity, HomeActivity::class.java)
-           intent.putExtra("Name",it.name)
-           intent.putExtra("Description",it.biography)
-           startActivity(intent)
+
+               val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+               intent.putExtra("Name",it.name)
+               intent.putExtra("Description",it.biography)
+               startActivity(intent)
        })
+        viewModel.error.observe(this@LoginActivity,Observer {
+           if( it.isNotEmpty()){
+            Toast.makeText(this,it,Toast.LENGTH_LONG).show()}
+
+        })
     }
 
     private fun doLogin() {

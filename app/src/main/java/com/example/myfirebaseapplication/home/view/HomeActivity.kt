@@ -25,7 +25,7 @@ class HomeActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var listAdapter: WeatherListAdapter? = null
 
     var courses = arrayOf(
-        "Toronto,CA", "India/Kolkata",
+        "Toronto,CA", "Kolkata,India",
         "London,uk"
     )
 
@@ -76,13 +76,16 @@ class HomeActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         viewModel.api_response.observe(this@HomeActivity, Observer {
             binding.loading = false
             binding.showError=false
-        //    listAdapter?.updateAcroList(it.list)
+            listAdapter?.updateAcroList(it.list)
+            binding.isShown = true
             Log.d("apiiiiii", it.toString())
         })
         viewModel.error.observe(this@HomeActivity) {
+            binding.isShown = false
             binding.showError = it
         }
         viewModel.loading.observe(this@HomeActivity, Observer {
+            binding.isShown = false
             binding.loading = it
         })
     }
