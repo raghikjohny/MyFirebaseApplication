@@ -1,5 +1,6 @@
 package com.example.myfirebaseapplication.home.view
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -26,10 +27,9 @@ class HomeActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var listAdapter: WeatherListAdapter? = null
 
     var courses = arrayOf(
-        "Toronto,CA", "Kolkata,India",
+       "Kolkata,India", "Toronto,CA",
         "London,uk"
     )
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
@@ -40,6 +40,7 @@ class HomeActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         if (extras != null) {
             binding.tvName.text = extras.getString(AppConstants.NAME)
             binding.tvBiography.text = extras.getString(AppConstants.DESCRIPTION)
+          //  Log.d("image",extras.getString("image"))
         }
         binding.coursesspinner.setOnItemSelectedListener(this)
 
