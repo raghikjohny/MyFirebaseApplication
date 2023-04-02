@@ -1,12 +1,17 @@
 package com.example.myfirebaseapplication.home.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myfirebaseapplication.R
+import com.example.myfirebaseapplication.common.AppConstants
+import com.example.myfirebaseapplication.common.ProjectEventListners
 import com.example.myfirebaseapplication.databinding.ItemWeatherRecycleLayoutBinding
+import com.example.myfirebaseapplication.details.view.DetailsActivity
 import com.example.myfirebaseapplication.model.List
 
 class WeatherListAdapter(var weatherList: java.util.ArrayList<List>, val context: Context) :
@@ -21,8 +26,8 @@ class WeatherListAdapter(var weatherList: java.util.ArrayList<List>, val context
     }
 
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
-        val item = weatherList[position].main
-        holder.bindingView.dataModel = item.temp.toString()
+        val item = weatherList[position]
+        holder.bindingView.dataModel = item
     }
 
     override fun getItemCount(): Int {
@@ -41,6 +46,19 @@ class WeatherListAdapter(var weatherList: java.util.ArrayList<List>, val context
 
     inner class WeatherViewHolder(val bindingView: ItemWeatherRecycleLayoutBinding) :
         RecyclerView.ViewHolder(bindingView.root) {
-    }
 
+        init {
+            bindingView.eventListener=object :ProjectEventListners.OnRecyclerViewClicked{
+                override fun onClick() {
+                    val intent =Intent(context,DetailsActivity::class.java)
+                    intent.putExtra(AppConstants.TEMPARATURE,bindingView?.dataModel?.main?.temp?.toString())
+                    intent.putExtra(AppConstants.PRESSURE,bindingView?.dataModel?.main?.pressure?.toString())
+                    intent.putExtra(AppConstants.HUMIDITY,bindingView?.dataModel?.main?.humidity?.toString())
+                    intent.putExtra(AppConstants.DESCRIPTION, bindingView?.dataModel!!.weather[0]?.description)
+                 context.startActivity(intent)
+
+                }
+            }
+        }
+    }
 }

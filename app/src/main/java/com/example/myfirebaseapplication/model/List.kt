@@ -13,7 +13,7 @@ data class List(
     val main: Main,
     @SerializedName("weather")
     @Expose
-    val weather:kotlin.collections.List<Weather>,
+    val weather: kotlin.collections.List<Weather>,
     @SerializedName("clouds")
     @Expose
     val clouds: Clouds,
@@ -31,12 +31,12 @@ data class List(
     var rain: Rain,
 
     @SerializedName("sys")
-@Expose
-var sys: Sys,
-@SerializedName("dt_txt")
-@Expose
-var dtTxt: String
-    )
+    @Expose
+    var sys: Sys,
+    @SerializedName("dt_txt")
+    @Expose
+    var dtTxt: String
+)
 
 
 

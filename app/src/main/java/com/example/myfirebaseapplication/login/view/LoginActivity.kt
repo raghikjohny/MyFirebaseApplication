@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.myfirebaseapplication.R
+import com.example.myfirebaseapplication.common.AppConstants
 import com.example.myfirebaseapplication.common.ProjectEventListners
 import com.example.myfirebaseapplication.databinding.ActivityLoginBinding
 import com.example.myfirebaseapplication.home.view.HomeActivity
@@ -32,8 +33,8 @@ class LoginActivity : AppCompatActivity() {
        viewModel.userLiveData.observe(this@LoginActivity, Observer {
 
                val intent = Intent(this@LoginActivity, HomeActivity::class.java)
-               intent.putExtra("Name",it.name)
-               intent.putExtra("Description",it.biography)
+               intent.putExtra(AppConstants.NAME,it.name)
+               intent.putExtra(AppConstants.DESCRIPTION,it.biography)
                startActivity(intent)
        })
         viewModel.error.observe(this@LoginActivity,Observer {

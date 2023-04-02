@@ -9,4 +9,11 @@ interface ProjectEventListners {
         fun signUp()
         fun takeImage()
     }
+
+    interface DetailPageEvents{
+        fun backBtnPress()
+    }
+    interface OnRecyclerViewClicked{
+        fun onClick()
+    }
 }

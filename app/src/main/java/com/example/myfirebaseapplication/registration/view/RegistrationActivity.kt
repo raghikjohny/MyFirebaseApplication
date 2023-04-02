@@ -23,7 +23,7 @@ class RegistrationActivity : AppCompatActivity() {
     lateinit var binding: ActivityRegistrationBinding
     private lateinit var user: User
     var pic_id: Int = 333
-    private lateinit var  photo: Bitmap
+    private lateinit var photo: Bitmap
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_registration)
@@ -35,10 +35,16 @@ class RegistrationActivity : AppCompatActivity() {
     private fun observeUser() {
         viewModel.userLiveData.observe(this@RegistrationActivity, Observer {
             if (it != null) {
-                Toast.makeText(this,"User added successfully.",Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.user_error), Toast.LENGTH_LONG).show()
                 val intent = Intent(this@RegistrationActivity, LoginActivity::class.java)
                 startActivity(intent)
             }
+        })
+        viewModel.error.observe(this@RegistrationActivity, Observer {
+            if (it.isNotEmpty()) {
+                Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            }
+
         })
     }
 
@@ -54,7 +60,6 @@ class RegistrationActivity : AppCompatActivity() {
                 )
                 viewModel.doSingUp(user)
             }
-
             override fun takeImage() {
                 val camera_intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 startActivityForResult(camera_intent, pic_id)
@@ -66,6 +71,5 @@ class RegistrationActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         photo = (data!!.extras!!["data"] as Bitmap?)!!
         binding.ivProfile.setImageBitmap(photo)
-
     }
 }

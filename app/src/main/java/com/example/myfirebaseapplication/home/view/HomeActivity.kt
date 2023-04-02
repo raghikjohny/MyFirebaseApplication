@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myfirebaseapplication.R
+import com.example.myfirebaseapplication.common.AppConstants
 import com.example.myfirebaseapplication.databinding.ActivityHomeBinding
 import com.example.myfirebaseapplication.home.adapter.WeatherListAdapter
 import com.example.myfirebaseapplication.home.viewmodel.HomeViewModel
@@ -37,11 +38,10 @@ class HomeActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         val extras = intent.extras
         if (extras != null) {
-            binding.tvName.text = extras.getString("Name")
-            binding.tvBiography.text = extras.getString("Description")
+            binding.tvName.text = extras.getString(AppConstants.NAME)
+            binding.tvBiography.text = extras.getString(AppConstants.DESCRIPTION)
         }
         binding.coursesspinner.setOnItemSelectedListener(this)
-
 
         val ad: ArrayAdapter<*> = ArrayAdapter<Any?>(
             this,
@@ -75,10 +75,9 @@ class HomeActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private fun observeData() {
         viewModel.api_response.observe(this@HomeActivity, Observer {
             binding.loading = false
-            binding.showError=false
+            binding.showError = false
             listAdapter?.updateAcroList(it.list)
             binding.isShown = true
-            Log.d("apiiiiii", it.toString())
         })
         viewModel.error.observe(this@HomeActivity) {
             binding.isShown = false
@@ -91,7 +90,6 @@ class HomeActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-       // binding.tvSelectedCity.text = courses[p2]
         apiSearch(courses[p2])
     }
 
