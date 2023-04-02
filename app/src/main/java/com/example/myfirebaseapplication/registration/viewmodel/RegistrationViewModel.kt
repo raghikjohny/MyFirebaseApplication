@@ -13,18 +13,24 @@ class RegistrationViewModel : ViewModel() {
     lateinit var fireBaseRepo: FirebaseRepository
     private lateinit var auth: FirebaseAuth
     var userLiveData = MutableLiveData<User>()
+    var error = MutableLiveData<String>()
 
     fun doSingUp(user: User) {
         fireBaseRepo = FirebaseRepository()
         auth = Firebase.auth
-        auth.createUserWithEmailAndPassword(user.email, user.password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    userLiveData.postValue(user)
-                    fireBaseRepo.addUser(user)
-                } else {
-                    //TODO
+        if(user.email.isNotEmpty() && user.password.isNotEmpty() && user.biography.isNotEmpty() &&
+            user.image.isNotEmpty() && user.name.isNotEmpty()) {
+            auth.createUserWithEmailAndPassword(user.email, user.password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        userLiveData.postValue(user)
+                        fireBaseRepo.addUser(user)
+                    } else {
+                        error.postValue("User not added")
+                    }
                 }
-            }
+        } else{
+            error.postValue("Please enter user details")
+        }
     }
 }

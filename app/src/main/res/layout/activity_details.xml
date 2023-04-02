@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".details.view.DetailsActivity">
+
+
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/weather_detail"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:textSize="@dimen/text_size_20"
+    android:textColor="@color/purple_200"
+    android:id="@+id/tvHeading"
+    android:layout_marginTop="@dimen/width_20dp"
+    android:layout_marginEnd="@dimen/width_20dp"
+    android:gravity="center_horizontal"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:id="@+id/tvTemp"
+        android:layout_marginStart="@dimen/margin_16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:text="@string/temparature"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeading"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:id="@+id/tvTempValue"
+        android:layout_marginStart="@dimen/margin_40dp"
+        android:layout_marginTop="@dimen/width_20dp"
+        app:layout_constraintStart_toEndOf="@+id/tvPressure"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeading"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:id="@+id/tvPressure"
+        android:layout_marginStart="@dimen/margin_16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/width_20dp"
+        android:text="@string/pressure"
+        app:layout_constraintTop_toBottomOf="@+id/tvTemp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:id="@+id/tvPressureValue"
+        android:layout_marginStart="@dimen/margin_40dp"
+        android:layout_marginTop="@dimen/width_20dp"
+        app:layout_constraintStart_toEndOf="@+id/tvPressure"
+        app:layout_constraintTop_toBottomOf="@+id/tvTemp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:id="@+id/tvHumidity"
+        android:layout_marginStart="@dimen/margin_16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/width_20dp"
+        android:text="@string/humidity"
+        app:layout_constraintTop_toBottomOf="@+id/tvPressure"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:id="@+id/tvHumidityValue"
+        android:layout_marginStart="@dimen/margin_40dp"
+        android:layout_marginTop="@dimen/width_20dp"
+        app:layout_constraintStart_toEndOf="@+id/tvHumidity"
+        app:layout_constraintTop_toBottomOf="@+id/tvPressure"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:id="@+id/tvWeatherDescription"
+        android:layout_marginStart="@dimen/margin_16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/width_20dp"
+        android:text="@string/weather_description"
+        app:layout_constraintTop_toBottomOf="@+id/tvHumidity"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:id="@+id/tvWeatherDescriptionValue"
+        android:layout_marginStart="@dimen/margin_40dp"
+        android:layout_marginTop="@dimen/width_20dp"
+        app:layout_constraintStart_toEndOf="@+id/tvWeatherDescription"
+        app:layout_constraintTop_toBottomOf="@+id/tvHumidity"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

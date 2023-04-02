@@ -9,5 +9,11 @@
     <string name="city">Select City</string>
     <string name="error_text">something went wrong</string>
     <string name="temparature_is">Temparature is:</string>
+    <string name="weather_detail">Weather Detail</string>
+    <string name="pressure">pressure</string>
+    <string name="humidity">Humidity</string>
+    <string name="weather_description">Weather Description</string>
+    <string name="temparature">Temparature</string>
+    <string name="user_error">User added successfully.</string>
 
 </resources>
