@@ -8,7 +8,7 @@
     <string name="short_biography">Short Biography</string>
     <string name="city">Select City</string>
     <string name="error_text">something went wrong</string>
-    <string name="temparature_is">Temparature is:</string>
+    <string name="temparature_is">Temparature is : \t\t</string>
     <string name="weather_detail">Weather Detail</string>
     <string name="pressure">pressure</string>
     <string name="humidity">Humidity</string>

@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myfirebaseapplication.common.FirebaseRepository
 import com.example.myfirebaseapplication.login.view.LoginActivity
+import com.example.myfirebaseapplication.model.ProfilePic
 import com.example.myfirebaseapplication.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -17,6 +18,7 @@ class LoginViewModel : ViewModel() {
     lateinit var fireBaseRepo: FirebaseRepository
     private lateinit var auth: FirebaseAuth
     var userLiveData = MutableLiveData<User>()
+    var userPicLiveData = MutableLiveData<ProfilePic>()
     var db = FirebaseFirestore.getInstance()
     var error = MutableLiveData<String>()
 
@@ -28,6 +30,7 @@ class LoginViewModel : ViewModel() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         fetchUser(email)
+                        fetchPrifilePic(email)
                         Log.d("succes", auth.currentUser.toString())
                     } else {
                         error.postValue("user not exist")
@@ -47,9 +50,26 @@ class LoginViewModel : ViewModel() {
                         document.data?.get("name").toString(),
                         document.data?.get("biography").toString(),"",
                         document.data?.get("email").toString(),
-                        document.data?.get("image").toString()
                     )
                     userLiveData.postValue(user)
+                    Log.d(ContentValues.TAG, "DocumentSnapshot data: ${document.data}")
+                } else {
+                    error.postValue("User not exist")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(ContentValues.TAG, "get failed with ", exception)
+            }
+    }
+    fun fetchPrifilePic(email: String?) {
+        db.collection("profile").document(email.toString()).get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    var user = ProfilePic(
+                        document.data?.get("email").toString(),
+                        document.data?.get("image").toString()
+                    )
+                    userPicLiveData.postValue(user)
                     Log.d(ContentValues.TAG, "DocumentSnapshot data: ${document.data}")
                 } else {
                     error.postValue("User not exist")

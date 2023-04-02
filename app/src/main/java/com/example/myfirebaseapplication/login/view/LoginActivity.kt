@@ -2,6 +2,7 @@ package com.example.myfirebaseapplication.login.view
 
 import android.app.Application
 import android.content.Intent
+import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -20,7 +21,7 @@ import com.google.firebase.FirebaseApp
 class LoginActivity : AppCompatActivity() {
     lateinit var viewModel: LoginViewModel
     lateinit var binding: ActivityLoginBinding
-
+    var image: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
@@ -30,16 +31,22 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun observeLogin() {
-       viewModel.userLiveData.observe(this@LoginActivity, Observer {
+        viewModel.userLiveData.observe(this@LoginActivity, Observer {
 
-               val intent = Intent(this@LoginActivity, HomeActivity::class.java)
-               intent.putExtra(AppConstants.NAME,it.name)
-               intent.putExtra(AppConstants.DESCRIPTION,it.biography)
-               startActivity(intent)
-       })
-        viewModel.error.observe(this@LoginActivity,Observer {
-           if( it.isNotEmpty()){
-            Toast.makeText(this,it,Toast.LENGTH_LONG).show()}
+            val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+            intent.putExtra(AppConstants.NAME, it.name)
+            intent.putExtra(AppConstants.DESCRIPTION, it.biography)
+            intent.putExtra("image", image)
+            startActivity(intent)
+        })
+        viewModel.userPicLiveData.observe(this@LoginActivity, Observer {
+
+            image = it.image
+        })
+        viewModel.error.observe(this@LoginActivity, Observer {
+            if (it.isNotEmpty()) {
+                Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            }
 
         })
     }
@@ -47,9 +54,11 @@ class LoginActivity : AppCompatActivity() {
     private fun doLogin() {
         binding.eventListener = object : ProjectEventListners.LoginEvents {
             override fun login() {
-                viewModel.doLogin(binding.etEmail.text.toString(), binding.etPassword.text.toString())
+                viewModel.doLogin(
+                    binding.etEmail.text.toString(),
+                    binding.etPassword.text.toString()
+                )
             }
-
             override fun navToSignUp() {
                 val intent = Intent(this@LoginActivity, RegistrationActivity::class.java)
                 startActivity(intent)
